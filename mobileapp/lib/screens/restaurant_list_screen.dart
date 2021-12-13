@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/model/restaurant.dart';
+import 'package:mobileapp/screens/dishes_list_screen.dart';
 
 class RestaurantsListScreen extends StatelessWidget {
   const RestaurantsListScreen({
@@ -9,6 +10,9 @@ class RestaurantsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Restaurants near you"),
+      ),
       body: StreamBuilder(
         stream: restaurantsSnapshots(),
         builder: (
@@ -30,7 +34,15 @@ class RestaurantsListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final restaurants = snapshot.data;
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DishesListScreen(
+                        restaurant: restaurants![index],
+                      ),
+                    ),
+                  );
+                },
                 child: GridTile(
                   child: Row(
                     children: [
