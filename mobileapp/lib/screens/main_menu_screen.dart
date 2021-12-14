@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/dishes_list_screen.dart';
+import 'package:mobileapp/screens/orders_list_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class MainScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => DishesListScreen(),
+                builder: (context) => const DishesListScreen(),
               ));
             },
             child: const Text("Customer Service"),
@@ -25,7 +26,11 @@ class MainScreen extends StatelessWidget {
         ),
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const OrdersListScreen(),
+              ));
+            },
             child: const Text("Kitchen orders"),
           ),
         ),
