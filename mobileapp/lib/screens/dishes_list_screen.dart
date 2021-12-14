@@ -1,43 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/model/restaurant.dart';
+import 'package:mobileapp/model/platos.dart';
 
 class DishesListScreen extends StatelessWidget {
-  final Restaurant restaurant;
   const DishesListScreen({
     Key? key,
-    required this.restaurant,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(restaurant.name),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: restaurant.dishes.length,
-              itemBuilder: (context, index) {
-                final dish = restaurant.dishes[index];
-                return ListTile(
-                  title: Text(dish.name),
-                  subtitle: const Text("Description"),
-                  trailing: Row(
-                    children: [
-                      Text("${dish.price}€"),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                );
-              },
+      appBar: AppBar(),
+      body: StreamBuilder(
+        stream: platosSnapshots(),
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<List<Plato>> snapshot,
+        ) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 16 / 9,
             ),
-          ),
-        ],
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              final dishes = snapshot.data;
+              return GestureDetector(
+                onTap: () {},
+                child: GridTile(
+                  child: Container(
+                    child: Center(
+                      child: Text(dishes![index].name),
+                    ),
+                    color: Colors.amber,
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
