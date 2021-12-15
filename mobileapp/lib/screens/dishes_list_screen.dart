@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/model/platos.dart';
+import 'package:mobileapp/screens/order_screen.dart';
 
-class DishesListScreen extends StatelessWidget {
+class DishesListScreen extends StatefulWidget {
   const DishesListScreen({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<DishesListScreen> createState() => _DishesListScreenState();
+}
+
+class _DishesListScreenState extends State<DishesListScreen> {
+  @override
   Widget build(BuildContext context) {
+    List<Plato> order = [];
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Customer Service"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(
+                MaterialPageRoute(
+                  builder: (context) => OrderScreen(dishes: order),
+                ),
+              )
+                  .then((result) {
+                if (result != null) {
+                  setState(() => order = result);
+                }
+              });
+            },
+            icon: const Icon(
+              Icons.check,
+            ),
+          ),
+        ],
+      ),
       body: StreamBuilder(
         stream: platosSnapshots(),
         builder: (
@@ -32,7 +61,9 @@ class DishesListScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final dishes = snapshot.data;
               return GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  order.add(dishes![index]);
+                },
                 child: GridTile(
                   child: Container(
                     child: Center(

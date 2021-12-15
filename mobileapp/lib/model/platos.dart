@@ -10,6 +10,12 @@ class Plato {
       : name = data['name'],
         price = data['price'],
         type = data['type'];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'price': price,
+        'type': type,
+      };
 }
 
 Stream<List<Plato>> platosSnapshots() {

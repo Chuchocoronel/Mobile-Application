@@ -9,7 +9,6 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           child: ElevatedButton(
@@ -18,7 +17,12 @@ class MainScreen extends StatelessWidget {
                 builder: (context) => const DishesListScreen(),
               ));
             },
-            child: const Text("Customer Service"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("Customer Service"),
+              ],
+            ),
           ),
         ),
         const SizedBox(
@@ -31,7 +35,12 @@ class MainScreen extends StatelessWidget {
                 builder: (context) => const OrdersListScreen(),
               ));
             },
-            child: const Text("Kitchen orders"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("Kitchen Orders"),
+              ],
+            ),
           ),
         ),
       ],
