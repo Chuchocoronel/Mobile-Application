@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/model/order.dart';
 
@@ -19,6 +20,7 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final db = FirebaseFirestore.instance.collection("/Orders");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Orders"),
@@ -44,7 +46,10 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                   children: [
                     ElevatedButton(
                       onPressed: () {},
-                      onLongPress: () {},
+                      onLongPress: () {
+                        final docRef = db.doc("/${snapshot.data![index].id}");
+                        docRef.delete();
+                      },
                       child: const Text(
                         "Hold to Delete Order",
                         style: TextStyle(

@@ -15,10 +15,9 @@ class Item {
 
 class Order {
   List<Item> items;
+  String id = "";
 
   Order(this.items);
-
-  Order.fromPlatosList(List<Plato> dishes) : items = dishes.cast();
 
   Order.fromFirebase(Map<String, dynamic> json)
       : items = json['items']
@@ -38,6 +37,7 @@ Stream<List<Order>> ordersSnapshots() {
     List<Order> orders = [];
     for (final docRef in querySnapshot.docs) {
       final order = Order.fromFirebase(docRef.data());
+      order.id = docRef.id;
       orders.add(order);
     }
     return orders;

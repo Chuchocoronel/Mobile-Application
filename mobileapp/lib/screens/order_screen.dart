@@ -24,44 +24,6 @@ class _OrderScreenState extends State<OrderScreen> {
             Navigator.of(context).pop();
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shop),
-            onPressed: () {
-              guardaPlatos(
-                Order([
-                  Item(Plato("tortilla", 10, "dish")),
-                  Item(Plato("fistro", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                  Item(Plato("tortilla", 1, "dish")),
-                ]),
-              );
-            },
-          )
-        ],
       ),
       body: Column(
         children: [
@@ -73,7 +35,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 });
               },
               child: const Text(
-                "Clear",
+                "Clear Order",
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -98,7 +60,16 @@ class _OrderScreenState extends State<OrderScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              List<Item> items = [];
+              for (final dish in widget.dishes) {
+                final item = Item(dish);
+                items.add(item);
+              }
+              Order order = Order(items);
+              guardaPlatos(order);
+              setState(() {});
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
