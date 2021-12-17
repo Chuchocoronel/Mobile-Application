@@ -8,8 +8,8 @@ class Item {
   Item.fromJson(Map<String, dynamic> json)
       : plato = Plato.fromFirestore(json['plato']);
 
-  Map<String, dynamic> toJson() => {
-        'plato': plato.toJson(),
+  Map<String, dynamic> toFirestore() => {
+        'plato': plato.toFirestore(),
       };
 }
 
@@ -18,14 +18,16 @@ class Order {
 
   Order(this.items);
 
+  Order.fromPlatosList(List<Plato> dishes) : items = dishes.cast();
+
   Order.fromFirebase(Map<String, dynamic> json)
       : items = json['items']
             .map((item) => Item.fromJson(item))
             .toList()
             .cast<Item>();
 
-  Map<String, dynamic> toJson() => {
-        'items': items.map((item) => item.toJson()).toList(),
+  Map<String, dynamic> toFirestore() => {
+        'items': items.map((item) => item.toFirestore()).toList(),
       };
 }
 
@@ -42,13 +44,13 @@ Stream<List<Order>> ordersSnapshots() {
   });
 }
 
-Future<void> guardaPlatos(String mesa, Order order) async {
+Future<void> guardaPlatos(Order order) async {
   final db = FirebaseFirestore.instance;
   await db
       .collection("/Orders")
       .withConverter<Order>(
         fromFirestore: (snapshot, _) => Order.fromFirebase(snapshot.data()!),
-        toFirestore: (model, _) => model.toJson(),
+        toFirestore: (model, _) => model.toFirestore(),
       )
       .add(order);
 }

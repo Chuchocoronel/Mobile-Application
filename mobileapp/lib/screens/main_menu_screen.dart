@@ -20,7 +20,12 @@ class MainScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text("Customer Service"),
+                Text(
+                  "Create Order",
+                  style: TextStyle(
+                    fontSize: 26,
+                  ),
+                ),
               ],
             ),
           ),
@@ -38,8 +43,16 @@ class MainScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text("Kitchen Orders"),
+                Text(
+                  "View Orders",
+                  style: TextStyle(
+                    fontSize: 26,
+                  ),
+                ),
               ],
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
             ),
           ),
         ),

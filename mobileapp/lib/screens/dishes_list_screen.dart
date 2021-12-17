@@ -60,16 +60,22 @@ class _DishesListScreenState extends State<DishesListScreen> {
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final dishes = snapshot.data;
-              return GestureDetector(
-                onTap: () {
-                  order.add(dishes![index]);
-                },
-                child: GridTile(
-                  child: Container(
-                    child: Center(
-                      child: Text(dishes![index].name),
+              return GridTile(
+                child: ElevatedButton(
+                  onPressed: () {
+                    order.add(dishes![index]);
+                  },
+                  child: Center(
+                    child: Text(
+                      dishes![index].name,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
                     ),
-                    color: Colors.amber,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber[300],
                   ),
                 ),
               );

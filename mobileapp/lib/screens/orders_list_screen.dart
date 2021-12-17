@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/model/order.dart';
 
-class OrdersListScreen extends StatelessWidget {
+class OrdersListScreen extends StatefulWidget {
   const OrdersListScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OrdersListScreen> createState() => _OrdersListScreenState();
+}
+
+class _OrdersListScreenState extends State<OrdersListScreen> {
+  late PageController controller;
+
+  @override
+  void initState() {
+    controller = PageController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Orders"),
+        backgroundColor: Colors.red,
       ),
       body: StreamBuilder<List<Order>>(
           stream: ordersSnapshots(),
@@ -21,25 +35,77 @@ class OrdersListScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            return GridView.builder(
+            return PageView.builder(
+              controller: controller,
               itemCount: snapshot.data!.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 16 / 9,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onLongPress: () {},
-                  child: GridTile(
-                    child: Container(
-                      color: Colors.yellow[200],
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                final items = snapshot.data![index].items;
+                return Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      onLongPress: () {},
+                      child: const Text(
+                        "Hold to Delete Order",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, it) {
+                          final dish = items[it].plato;
+                          return ListTile(
+                            title: Text(
+                              dish.name,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                            trailing: Text(
+                              "${dish.price}€",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      color: Colors.red,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Text(
+                              "Total:",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 26,
+                              ),
+                            ),
+                            Text(
+                              "0€",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 26,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             );

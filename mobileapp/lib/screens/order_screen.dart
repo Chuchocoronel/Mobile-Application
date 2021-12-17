@@ -29,10 +29,34 @@ class _OrderScreenState extends State<OrderScreen> {
             icon: const Icon(Icons.shop),
             onPressed: () {
               guardaPlatos(
-                "mesa",
                 Order([
                   Item(Plato("tortilla", 10, "dish")),
                   Item(Plato("fistro", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
+                  Item(Plato("tortilla", 1, "dish")),
                 ]),
               );
             },
@@ -44,9 +68,14 @@ class _OrderScreenState extends State<OrderScreen> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                setState(() {
+                  widget.dishes.clear();
+                });
               },
-              child: const Text("Clear order"),
+              child: const Text(
+                "Clear",
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           ),
           Expanded(
@@ -66,6 +95,23 @@ class _OrderScreenState extends State<OrderScreen> {
                   ),
                 );
               },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    "Confirm Order",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

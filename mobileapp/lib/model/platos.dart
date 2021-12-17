@@ -11,7 +11,7 @@ class Plato {
         price = data['price'],
         type = data['type'];
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toFirestore() => {
         'name': name,
         'price': price,
         'type': type,
