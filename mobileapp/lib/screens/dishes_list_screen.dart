@@ -65,15 +65,30 @@ class _DishesListScreenState extends State<DishesListScreen> {
                   onPressed: () {
                     order.add(dishes![index]);
                   },
-                  child: Center(
-                    child: Text(
-                      dishes![index].name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
+                  child: Column(children: [
+                    Align(
+                      heightFactor: 1.5,
+                      alignment: Alignment.center,
+                      child: Text(
+                        dishes![index].name,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
+                    Align(
+                      heightFactor: 1.25,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "${dishes![index].price}€",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ]),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.amber[300],
                   ),
