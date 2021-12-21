@@ -69,7 +69,10 @@ class _OrderScreenState extends State<OrderScreen> {
               }
               Order order = Order(items);
               guardaPlatos(order);
-              setState(() {});
+              setState(() {
+                widget.dishes.clear();
+              });
+              Navigator.of(context).pop();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
