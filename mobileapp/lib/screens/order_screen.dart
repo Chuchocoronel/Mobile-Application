@@ -46,8 +46,20 @@ class _OrderScreenState extends State<OrderScreen> {
               itemBuilder: (context, index) {
                 final dish = widget.dishes[index];
                 return ListTile(
-                  title: Text(dish.name),
-                  subtitle: Text("${dish.price}€"),
+                  title: Text(
+                    dish.name,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                  subtitle: Text(
+                    "${dish.price}€",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete_forever),
                     onPressed: () {
