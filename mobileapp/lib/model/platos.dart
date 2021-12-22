@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Plato {
   String name;
-  int price;
+  num price;
   String type;
 
   Plato(this.name, this.price, this.type);

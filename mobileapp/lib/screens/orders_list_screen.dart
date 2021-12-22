@@ -18,6 +18,15 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
     super.initState();
   }
 
+  num totalPrice(List<Item> items) {
+    num total = 0;
+    for (final item in items) {
+      total += item.plato.price;
+    }
+
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance.collection("/Orders");
@@ -91,8 +100,8 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "Total:",
                               style: TextStyle(
                                 color: Colors.white,
@@ -100,8 +109,8 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                               ),
                             ),
                             Text(
-                              "0€",
-                              style: TextStyle(
+                              "${totalPrice(items)}€",
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 26,
                               ),

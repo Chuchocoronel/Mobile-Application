@@ -14,6 +14,15 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  num totalPrice(List<Plato> items) {
+    num total = 0;
+    for (final item in items) {
+      total += item.price;
+    }
+
+    return total;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +79,28 @@ class _OrderScreenState extends State<OrderScreen> {
                   ),
                 );
               },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Total:",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 26,
+                  ),
+                ),
+                Text(
+                  "${totalPrice(widget.dishes)}€",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 26,
+                  ),
+                )
+              ],
             ),
           ),
           ElevatedButton(
