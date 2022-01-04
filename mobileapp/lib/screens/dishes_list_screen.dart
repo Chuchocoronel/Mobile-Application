@@ -90,15 +90,24 @@ class _DishesListScreenState extends State<DishesListScreen> {
                         Icon(
                           Icons.local_drink_rounded,
                           size: 30,
+                          color: Colors.lightBlueAccent,
                         ),
                       if (dishes[index].type == 'dish')
-                        Icon(Icons.restaurant, size: 30),
+                        Icon(
+                          Icons.restaurant,
+                          size: 30,
+                          color: Colors.brown,
+                        ),
                       if (dishes[index].type == 'dessert')
-                        Icon(Icons.cake, size: 30),
+                        Icon(
+                          Icons.cake,
+                          size: 30,
+                          color: Colors.white70,
+                        ),
                     ],
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.amber[300],
+                    primary: Colors.green,
                   ),
                 ),
               );
