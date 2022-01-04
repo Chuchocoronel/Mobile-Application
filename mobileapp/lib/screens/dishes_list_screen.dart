@@ -34,7 +34,8 @@ class _DishesListScreenState extends State<DishesListScreen> {
               });
             },
             icon: const Icon(
-              Icons.check,
+              Icons.check_circle_outline,
+              size: 40,
             ),
           ),
         ],
@@ -80,10 +81,20 @@ class _DishesListScreenState extends State<DishesListScreen> {
                         "${dishes[index].price}€",
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                          fontWeight: FontWeight.w900,
                           color: Colors.black,
                           fontSize: 20,
                         ),
                       ),
+                      if (dishes[index].type == 'drink')
+                        Icon(
+                          Icons.local_drink_rounded,
+                          size: 30,
+                        ),
+                      if (dishes[index].type == 'dish')
+                        Icon(Icons.restaurant, size: 30),
+                      if (dishes[index].type == 'dessert')
+                        Icon(Icons.cake, size: 30),
                     ],
                   ),
                   style: ElevatedButton.styleFrom(
