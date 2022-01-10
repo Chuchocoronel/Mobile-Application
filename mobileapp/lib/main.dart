@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/main_menu_screen.dart';
+import 'package:mobileapp/widgets/auth_gate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const AuthGate(app: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
