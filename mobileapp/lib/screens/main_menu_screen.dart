@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobileapp/screens/dishes_list_screen.dart';
@@ -10,6 +11,17 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        AppBar(
+          title: const Text("Service"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+            )
+          ],
+        ),
         Expanded(
           child: ElevatedButton(
             onPressed: () {
