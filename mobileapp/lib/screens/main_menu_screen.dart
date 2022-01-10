@@ -11,17 +11,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppBar(
-          title: const Text("Service"),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-            )
-          ],
-        ),
         Expanded(
           child: ElevatedButton(
             onPressed: () {
@@ -65,6 +54,30 @@ class MainScreen extends StatelessWidget {
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Log Out",
+                  style: TextStyle(
+                    fontSize: 26,
+                  ),
+                ),
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.yellow,
             ),
           ),
         ),
