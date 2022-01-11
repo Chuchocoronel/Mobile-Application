@@ -79,14 +79,14 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                             title: Text(
                               dish.name,
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 20,
                               ),
                             ),
                             trailing: Text(
                               "${dish.price}€",
                               style: const TextStyle(
-                                color: Colors.black,
+                                color: Colors.white,
                                 fontSize: 20,
                               ),
                             ),

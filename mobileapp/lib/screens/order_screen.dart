@@ -58,14 +58,14 @@ class _OrderScreenState extends State<OrderScreen> {
                   title: Text(
                     dish.name,
                     style: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
                   subtitle: Text(
                     "${dish.price}€",
                     style: const TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 16,
                     ),
                   ),
@@ -89,14 +89,14 @@ class _OrderScreenState extends State<OrderScreen> {
                 const Text(
                   "Total:",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 26,
                   ),
                 ),
                 Text(
                   "${totalPrice(widget.dishes)}€",
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 26,
                   ),
                 )

@@ -18,13 +18,17 @@ class Plato {
       };
 }
 
-Stream<List<Plato>> platosSnapshots() {
+Stream<Map<String, List<Plato>>> platosSnapshots() {
   final db = FirebaseFirestore.instance;
-  final stream = db.collection("/Platos").snapshots();
+  final stream = db.collection("/Platos").orderBy("type").snapshots();
   return stream.map((querySnapshot) {
-    List<Plato> dishes = [];
+    Map<String, List<Plato>> dishes = {};
     for (final docRef in querySnapshot.docs) {
-      dishes.add(Plato.fromFirestore(docRef.data()));
+      final plato = Plato.fromFirestore(docRef.data());
+      if (!dishes.containsKey(plato.type)) {
+        dishes[plato.type] = [];
+      }
+      dishes[plato.type]!.add(plato);
     }
     return dishes;
   });
