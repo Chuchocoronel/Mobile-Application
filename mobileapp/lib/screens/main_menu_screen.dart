@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobileapp/screens/dishes_list_screen.dart';
 import 'package:mobileapp/screens/orders_list_screen.dart';
+import 'package:mobileapp/screens/table_selector.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -40,7 +39,7 @@ class MainScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const DishesListScreen(),
+                builder: (context) => const ChooseTable(),
               ));
             },
             child: Row(

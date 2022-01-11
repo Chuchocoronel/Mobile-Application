@@ -115,6 +115,7 @@ class _OrderScreenState extends State<OrderScreen> {
               setState(() {
                 widget.dishes.clear();
               });
+              //TODO: Mirar como saltar dos pantallas
               Navigator.of(context).pop();
             },
             child: Row(
