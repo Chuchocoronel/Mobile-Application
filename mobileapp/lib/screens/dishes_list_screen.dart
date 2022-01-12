@@ -3,8 +3,10 @@ import 'package:mobileapp/model/platos.dart';
 import 'package:mobileapp/screens/order_screen.dart';
 
 class DishesListScreen extends StatefulWidget {
+  final num table;
   const DishesListScreen({
     Key? key,
+    required this.table,
   }) : super(key: key);
 
   @override
@@ -67,7 +69,10 @@ class _DishesListScreenState extends State<DishesListScreen> {
               Navigator.of(context)
                   .push(
                 MaterialPageRoute(
-                  builder: (context) => OrderScreen(dishes: order),
+                  builder: (context) => OrderScreen(
+                    dishes: order,
+                    table: widget.table,
+                  ),
                 ),
               )
                   .then((result) {

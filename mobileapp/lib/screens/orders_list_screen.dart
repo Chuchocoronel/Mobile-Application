@@ -50,25 +50,39 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
               controller: controller,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                final items = snapshot.data![index].items;
+                final order = snapshot.data![index];
+                final items = order.items;
                 return Column(
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      onLongPress: () {
-                        final docRef = db.doc("/${snapshot.data![index].id}");
-                        docRef.delete();
-                      },
-                      child: const Text(
-                        "Hold to Delete Order",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "Table Nº ${snapshot.data![index].tableNum.toString()}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                      ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          onLongPress: () {
+                            final docRef =
+                                db.doc("/${snapshot.data![index].id}");
+                            docRef.delete();
+                          },
+                          child: const Text(
+                            "Hold to Delete Order",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -76,6 +90,12 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                         itemBuilder: (context, it) {
                           final dish = items[it].plato;
                           return ListTile(
+                            leading: Checkbox(
+                              value: items[it].check,
+                              onChanged: (value) {
+                                toggleCheckItem(order, it);
+                              },
+                            ),
                             title: Text(
                               dish.name,
                               style: const TextStyle(

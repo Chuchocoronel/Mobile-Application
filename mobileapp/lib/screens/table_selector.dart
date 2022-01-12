@@ -41,7 +41,9 @@ class _ChooseTableState extends State<ChooseTable> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const DishesListScreen(),
+                      builder: (context) => DishesListScreen(
+                        table: index + 1,
+                      ),
                     ));
                   },
                   child: GridTile(

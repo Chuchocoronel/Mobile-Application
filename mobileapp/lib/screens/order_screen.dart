@@ -4,9 +4,11 @@ import 'package:mobileapp/model/platos.dart';
 
 class OrderScreen extends StatefulWidget {
   final List<Plato> dishes;
+  final num table;
   const OrderScreen({
     Key? key,
     required this.dishes,
+    required this.table,
   }) : super(key: key);
 
   @override
@@ -107,10 +109,10 @@ class _OrderScreenState extends State<OrderScreen> {
             onPressed: () {
               List<Item> items = [];
               for (final dish in widget.dishes) {
-                final item = Item(dish);
+                final item = Item(dish, false);
                 items.add(item);
               }
-              Order order = Order(items);
+              Order order = Order(items, widget.table);
               guardaPlatos(order);
               setState(() {
                 widget.dishes.clear();
