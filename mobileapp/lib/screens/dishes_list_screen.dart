@@ -15,6 +15,7 @@ class DishesListScreen extends StatefulWidget {
 
 class _DishesListScreenState extends State<DishesListScreen> {
   String typeFilter = "dish";
+  List<Plato> order = [];
 
   Widget buildFilterButton(String type) {
     IconData icon = Icons.restaurant;
@@ -59,7 +60,6 @@ class _DishesListScreenState extends State<DishesListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Plato> order = [];
     return Scaffold(
       appBar: AppBar(
         title: const Text("Customer Service"),
