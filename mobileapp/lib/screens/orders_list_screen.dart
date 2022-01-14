@@ -34,7 +34,7 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders"),
+        title: const Text("Orders, slide to see more orders"),
         backgroundColor: Colors.red,
       ),
       body: StreamBuilder<List<Order>>(
@@ -99,7 +99,7 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                                   });
                                 },
                                 child: ListTile(
-                                  tileColor: Colors.green,
+                                  tileColor: Colors.orange,
                                   title: Text(
                                     dish.name,
                                     style: const TextStyle(
@@ -137,14 +137,15 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                                   trailing: Text(
                                     "${dish.price}€",
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      decoration: TextDecoration.lineThrough,
+                                      color: Colors.grey,
                                       fontSize: 20,
                                     ),
                                   ),
                                 ),
                               );
                             }
-                            return Card();
+                            return const Card();
                           }),
                     ),
                     Container(
