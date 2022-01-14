@@ -30,6 +30,8 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance.collection("/Orders");
+    bool checkedButton = false;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Orders"),
@@ -86,33 +88,64 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: items.length,
-                        itemBuilder: (context, it) {
-                          final dish = items[it].plato;
-                          return ListTile(
-                            leading: Checkbox(
-                              value: items[it].check,
-                              onChanged: (value) {
-                                toggleCheckItem(order, it);
-                              },
-                            ),
-                            title: Text(
-                              dish.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                            trailing: Text(
-                              "${dish.price}€",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                          itemCount: items.length,
+                          itemBuilder: (context, it) {
+                            final dish = items[it].plato;
+                            if (checkedButton == false) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    checkedButton = true;
+                                  });
+                                },
+                                child: ListTile(
+                                  tileColor: Colors.green,
+                                  title: Text(
+                                    dish.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  trailing: Text(
+                                    "${dish.price}€",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            if (checkedButton == true) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    checkedButton = true;
+                                  });
+                                },
+                                child: ListTile(
+                                  tileColor: Colors.black,
+                                  title: Text(
+                                    dish.name,
+                                    style: const TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      color: Colors.grey,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  trailing: Text(
+                                    "${dish.price}€",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            return Card();
+                          }),
                     ),
                     Container(
                       color: Colors.red,

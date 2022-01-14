@@ -41,7 +41,7 @@ class _DishesListScreenState extends State<DishesListScreen> {
             color: Colors.black,
           ),
           const SizedBox(
-            width: 20,
+            width: 10,
           ),
           Text(
             type,
