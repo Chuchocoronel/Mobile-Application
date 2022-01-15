@@ -56,100 +56,82 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
                 final items = order.items;
                 return Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "Table Nº ${snapshot.data![index].tableNum.toString()}",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          onLongPress: () {
-                            final docRef =
-                                db.doc("/${snapshot.data![index].id}");
-                            docRef.delete();
-                          },
-                          child: const Text(
-                            "Hold to Delete Order",
-                            style: TextStyle(
+                    Container(
+                      color: Colors.grey[850],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "Table Nº ${snapshot.data![index].tableNum.toString()}",
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                          ElevatedButton(
+                            onPressed: () {},
+                            onLongPress: () {
+                              final docRef =
+                                  db.doc("/${snapshot.data![index].id}");
+                              docRef.delete();
+                            },
+                            child: const Text(
+                              "Hold to Delete Order",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Expanded(
-                      child: ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (context, it) {
-                            final dish = items[it].plato;
-                            if (checkedButton == false) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    checkedButton = true;
-                                  });
-                                },
-                                child: ListTile(
-                                  tileColor: Colors.orange,
-                                  title: Text(
-                                    dish.name,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  trailing: Text(
-                                    "${dish.price}€",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            if (checkedButton == true) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    checkedButton = true;
-                                  });
-                                },
-                                child: ListTile(
-                                  tileColor: Colors.black,
-                                  title: Text(
-                                    dish.name,
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      color: Colors.grey,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  trailing: Text(
-                                    "${dish.price}€",
-                                    style: const TextStyle(
-                                      decoration: TextDecoration.lineThrough,
-                                      color: Colors.grey,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            }
-                            return const Card();
-                          }),
+                      child: ListView.separated(
+                        itemCount: items.length,
+                        itemBuilder: (context, it) {
+                          final dish = items[it].plato;
+                          final check = items[it].check;
+                          var line = TextDecoration.none;
+                          var color = Colors.red;
+                          if (check) {
+                            line = TextDecoration.lineThrough;
+                            color = Colors.grey;
+                          }
+                          return ListTile(
+                            tileColor: color,
+                            onTap: () {
+                              setState(() {
+                                toggleCheckItem(order, it);
+                              });
+                            },
+                            title: Text(
+                              dish.name,
+                              style: TextStyle(
+                                decoration: line,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            trailing: Text(
+                              "${dish.price}€",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
+                      ),
                     ),
                     Container(
-                      color: Colors.red,
+                      color: Colors.grey[850],
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
