@@ -53,6 +53,19 @@ Stream<List<Order>> ordersSnapshots() {
   });
 }
 
+List<num> tableWithOrder() {
+  final db = FirebaseFirestore.instance;
+  final stream = db.collection("/Orders").orderBy('table').snapshots();
+  List<num> tables = [];
+  stream.map((querySnapshot) {
+    for (final docRef in querySnapshot.docs) {
+      final order = Order.fromFirebase(docRef.data());
+      tables.add(order.tableNum);
+    }
+  });
+  return tables;
+}
+
 Future<void> guardaPlatos(Order order) async {
   final db = FirebaseFirestore.instance;
   await db

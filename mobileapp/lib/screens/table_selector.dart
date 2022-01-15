@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileapp/model/order.dart';
 import 'package:mobileapp/screens/dishes_list_screen.dart';
 
 class ChooseTable extends StatefulWidget {
@@ -10,12 +11,13 @@ class ChooseTable extends StatefulWidget {
 
 class _ChooseTableState extends State<ChooseTable> {
   List<String> tables = [];
+  List<num> tableOrder = [];
 
   @override
   void initState() {
     super.initState();
 
-    for (int i = 1; i < 20; i++) {
+    for (int i = 1; i <= 20; i++) {
       tables.add("Table Nº$i");
     }
   }
@@ -31,13 +33,21 @@ class _ChooseTableState extends State<ChooseTable> {
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 6,
+                crossAxisCount: 5,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
                 childAspectRatio: 9 / 14,
               ),
               itemCount: tables.length,
               itemBuilder: (context, index) {
+                tableOrder = tableWithOrder();
+
+                var color = Colors.grey.shade300;
+                for (final number in tableOrder) {
+                  if (number == index + 1) {
+                    color = Colors.blue;
+                  }
+                }
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -49,7 +59,7 @@ class _ChooseTableState extends State<ChooseTable> {
                   child: GridTile(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: color,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
                         ),
