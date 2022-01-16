@@ -28,10 +28,7 @@ class Order {
 
   Order.fromFirebase(Map<String, dynamic> json)
       : tableNum = json['table'],
-        items = json['items']
-            .map((item) => Item.fromJson(item))
-            .toList()
-            .cast<Item>();
+        items = json['items'].map((item) => Item.fromJson(item)).toList().cast<Item>();
 
   Map<String, dynamic> toFirestore() => {
         'table': tableNum.toInt(),
@@ -64,6 +61,18 @@ List<num> tableWithOrder() {
     }
   });
   return tables;
+}
+
+Stream<List<Order>> sortedOrdersSnapshots() {
+  final db = FirebaseFirestore.instance;
+  final stream = db.collection("/Orders").orderBy("table").snapshots();
+  return stream.map((querysnap) {
+    List<Order> orders = [];
+    for (final docsnap in querysnap.docs) {
+      orders.add(Order.fromFirebase(docsnap.data()));
+    }
+    return orders;
+  });
 }
 
 Future<void> guardaPlatos(Order order) async {
