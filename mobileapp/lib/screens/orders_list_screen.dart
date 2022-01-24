@@ -30,12 +30,19 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance.collection("/Orders");
-    bool checkedButton = false;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Orders, slide to see more orders"),
-        backgroundColor: Colors.red,
+        title: const Text("Orders         Swipe for more"),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: Icon(
+              Icons.swipe,
+              size: 40,
+            ),
+          ),
+        ],
       ),
       body: StreamBuilder<List<Order>>(
           stream: ordersSnapshots(),
@@ -54,6 +61,7 @@ class _OrdersListScreenState extends State<OrdersListScreen> {
               itemBuilder: (context, index) {
                 final order = snapshot.data![index];
                 final items = order.items;
+                sortOrderItems(order);
                 return Column(
                   children: [
                     Container(

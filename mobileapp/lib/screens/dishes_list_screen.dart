@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileapp/model/platos.dart';
 import 'package:mobileapp/screens/order_screen.dart';
+import 'package:mobileapp/screens/table_selector.dart';
 
 class DishesListScreen extends StatefulWidget {
   final num table;
@@ -62,28 +63,38 @@ class _DishesListScreenState extends State<DishesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Customer Service"),
+        title: const Text("Dish Selection"),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(
-                MaterialPageRoute(
-                  builder: (context) => OrderScreen(
-                    dishes: order,
-                    table: widget.table,
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 20.0,
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(
+                  MaterialPageRoute(
+                    builder: (context) => OrderScreen(
+                      dishes: order,
+                      table: widget.table,
+                    ),
                   ),
-                ),
-              )
-                  .then((result) {
-                if (result != null) {
-                  setState(() => order = result);
-                }
-              });
-            },
-            icon: const Icon(
-              Icons.check_circle_outline,
-              size: 40,
+                )
+                    .then((result) {
+                  if (result != null) {
+                    if (result == true) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const ChooseTable(),
+                      ));
+                    }
+                    setState(() => order = result);
+                  }
+                });
+              },
+              icon: const Icon(
+                Icons.check_circle_outline,
+                size: 40,
+              ),
             ),
           ),
         ],

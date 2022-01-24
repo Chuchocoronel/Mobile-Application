@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobileapp/model/order.dart';
 import 'package:mobileapp/screens/dishes_list_screen.dart';
 
 class ChooseTable extends StatefulWidget {
@@ -10,15 +9,14 @@ class ChooseTable extends StatefulWidget {
 }
 
 class _ChooseTableState extends State<ChooseTable> {
-  List<String> tables = [];
-  List<num> tableOrder = [];
+  List<num> tables = [];
 
   @override
   void initState() {
     super.initState();
 
-    for (int i = 1; i <= 20; i++) {
-      tables.add("Table Nº$i");
+    for (int i = 1; i <= 21; i++) {
+      tables.add(i);
     }
   }
 
@@ -33,21 +31,14 @@ class _ChooseTableState extends State<ChooseTable> {
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
+                crossAxisCount: 3,
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 5,
-                childAspectRatio: 9 / 14,
+                childAspectRatio: 10 / 9,
               ),
               itemCount: tables.length,
               itemBuilder: (context, index) {
-                tableOrder = tableWithOrder();
-
                 var color = Colors.grey.shade300;
-                for (final number in tableOrder) {
-                  if (number == index + 1) {
-                    color = Colors.blue;
-                  }
-                }
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -65,18 +56,32 @@ class _ChooseTableState extends State<ChooseTable> {
                         ),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           const Icon(
-                            Icons.event_seat_rounded,
+                            Icons.flatware_outlined,
                             size: 40,
+                            color: Colors.black,
                           ),
-                          Text(
-                            tables[index],
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
+                          Column(
+                            children: [
+                              const Text(
+                                "Table",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Text(
+                                "Nº${tables[index]}",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

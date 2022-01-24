@@ -8,77 +8,123 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        SizedBox(
-          height: 100,
-          child: ElevatedButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "Log Out",
-                  style: TextStyle(
-                    fontSize: 26,
+        Padding(
+          padding: const EdgeInsets.only(
+            right: 10,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "Log\nOut",
+                        style: TextStyle(
+                          fontSize: 26,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Icon(
+                          Icons.logout_sharp,
+                          size: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.yellow[800],
                   ),
                 ),
-              ],
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.yellow,
-            ),
+              ),
+            ],
           ),
         ),
-        const SizedBox(
-          height: 20,
-        ),
         Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ChooseTable(),
-              ));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "Create Order",
-                  style: TextStyle(
-                    fontSize: 26,
+          child: Column(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const ChooseTable(),
+                    ));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            "Create Order",
+                            style: TextStyle(
+                              fontSize: 26,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Icon(
+                          Icons.task,
+                          size: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.lightBlue[800],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const OrdersListScreen(),
-              ));
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "View Orders",
-                  style: TextStyle(
-                    fontSize: 26,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const OrdersListScreen(),
+                    ));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            "View Orders",
+                            style: TextStyle(
+                              fontSize: 26,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Icon(
+                          Icons.storage_outlined,
+                          size: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red[800],
                   ),
                 ),
-              ],
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.red,
-            ),
+              ),
+            ],
           ),
         ),
       ],

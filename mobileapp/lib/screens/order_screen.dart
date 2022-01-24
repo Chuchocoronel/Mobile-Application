@@ -29,10 +29,10 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Order"),
+        title: Text("Order for table Nº${widget.table}"),
         leading: BackButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(false);
           },
         ),
       ),
@@ -117,8 +117,7 @@ class _OrderScreenState extends State<OrderScreen> {
               setState(() {
                 widget.dishes.clear();
               });
-              //TODO: Mirar como saltar dos pantallas
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

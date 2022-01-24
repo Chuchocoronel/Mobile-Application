@@ -53,19 +53,6 @@ Stream<List<Order>> ordersSnapshots() {
   });
 }
 
-List<num> tableWithOrder() {
-  final db = FirebaseFirestore.instance;
-  final stream = db.collection("/Orders").orderBy('table').snapshots();
-  List<num> tables = [];
-  stream.map((querySnapshot) {
-    for (final docRef in querySnapshot.docs) {
-      final order = Order.fromFirebase(docRef.data());
-      tables.add(order.tableNum);
-    }
-  });
-  return tables;
-}
-
 Stream<List<Order>> sortedOrdersSnapshots() {
   final db = FirebaseFirestore.instance;
   final stream = db.collection("/Orders").orderBy("table").snapshots();
@@ -92,6 +79,14 @@ Future<void> guardaPlatos(Order order) async {
 Future<void> toggleCheckItem(Order order, int itemIndex) async {
   order.items[itemIndex].toggleCheck();
   final db = FirebaseFirestore.instance;
+  await db.doc("/Orders/${order.id}").update({
+    'items': order.items.map((e) => e.toFirestore()).toList(),
+  });
+}
+
+Future<void> sortOrderItems(Order order) async {
+  final db = FirebaseFirestore.instance;
+  order.items.sort((a, b) => a.plato.type.compareTo(b.plato.type));
   await db.doc("/Orders/${order.id}").update({
     'items': order.items.map((e) => e.toFirestore()).toList(),
   });
